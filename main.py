@@ -2,8 +2,12 @@ import os
 from pathlib import Path
 from utils.statistics import calculate_average, find_min, find_max
 from utils.reader import read_numbers
-def main():
 
+def validate_numbers(numbers):
+    if len(numbers) == 0:
+        raise ValueError("Список пуст")
+
+def main():
     file_path = Path("data") / "measurements.txt"
     logs_dir = Path("logs")
     logs_dir.mkdir(exist_ok = True)
@@ -14,13 +18,10 @@ def main():
 
         numbers = read_numbers(file_path)#чтение float
         print(numbers)
-
         result_avg = calculate_average(numbers)#ср знач
         print(result_avg)
-
         result_max = find_max(numbers)#макс знач
         print(result_max)
-
         result_min = find_min(numbers)#мин знач
         print(result_min)
 
