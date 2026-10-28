@@ -1,17 +1,33 @@
+import os
+from pathlib import Path
 from utils.statistics import calculate_average, find_min, find_max
 from utils.reader import read_numbers
 def main():
-    file_path = "data/measurements.txt"
-    numbers = read_numbers(file_path)
+    current_directory = Path.cwd() #вывод текущего каталога
+    print(current_directory)
+
+    logs_dir = Path("logs")
+    logs_dir.mkdir(exist_ok = True)
+    print("файл создан или существует", logs_dir) #создание каталога коммандой
+
+    file_path = Path("data")/"measurements.txt"
+
+
+    if not file_path.exists():
+        print("Ошибка: ", file_path, "не найден!") #поиск файлов
+        return
+    print("Файл ",file_path, "найден")
+
+    numbers = read_numbers(file_path)#чтение float
     print(numbers)
 
-    result_avg = calculate_average([10, 20, 30])
+    result_avg = calculate_average(numbers)#ср знач
     print(result_avg)
 
-    result_max = find_max([10, 20, 30])
+    result_max = find_max(numbers)#макс знач
     print(result_max)
 
-    result_min = find_min([10, 20, 30])
+    result_min = find_min(numbers)#мин знач
     print(result_min)
 if __name__ == '__main__':
     main()
