@@ -1,5 +1,10 @@
 from utils.statistics import calculate_average, find_min, find_max
+from utils.reader import read_numbers
 def main():
+    file_path = "data/measurements.txt"
+    numbers = read_numbers(file_path)
+    print(numbers)
+
     result_avg = calculate_average([10, 20, 30])
     print(result_avg)
 
