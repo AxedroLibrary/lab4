@@ -3,8 +3,14 @@ from pathlib import Path
 from utils.statistics import calculate_average, find_min, find_max
 from utils.reader import read_numbers
 import logging
+import json
+with open("config.json", "r", encoding="utf-8") as f:
+    config = json.load(f)
 
-logging.basicConfig(filename = "./logs/log.log",
+input_file_path = config["input_file"]
+log_file_path = config["log_file"]
+
+logging.basicConfig(filename = log_file_path,
                     filemode = "w",
                     level = logging.INFO,
                     format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -17,7 +23,8 @@ def validate_numbers(numbers):
 def main():
     logging.info("Программа запущена")
 
-    file_path = Path("data") / "measurements.txt"
+    file_path = Path(input_file_path)
+    #file_path = Path("data") / "measurements.txt"
     logs_dir = Path("logs")
     logs_dir.mkdir(exist_ok = True)
     #print("файл создан или существует", logs_dir) #создание каталога коммандой
